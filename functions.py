@@ -26,31 +26,15 @@ class Application:
         cursor.execute(query,(self.company, self.contact_date, self.action, self.job_title, self.job_link, self.contact_name))
         connection.commit()  # apply all changes from cursor through the connection
     
-    def delete_application(self):
-        print("Enter the name of the company from which you want to delete the position")
-        user_input = input("Enter name of the company: ")
-        query = f"delete from contacts where company = %s;"
-        cursor.execute(query,(user_input,))
+    def delete_application_by_id(self, id):
+        query = f"delete from contacts where id = %s;"
+        cursor.execute(query,(id,))
         connection.commit()
 
-def main():
-    item = Application('Apple', '2023-03-21', 'Hr meating', 'Junior Data Analyst', 'www.apple.com/careers', 'Steve Jobs')
-    item.delete_application()
-
-    #Run SELECT queries
-    def select_all(table: str) -> list[tuple]:
-        query = f"select * from {table};"
+    def select_all(self) -> list[tuple]:
+        query = "select * from contacts;"
         cursor.execute(query)
         rows = (
             cursor.fetchall()
         )  # if the query returns something (like select) - fetch all of the rows returned
         return rows
-
-    rows_movies = select_all("contacts")
-
-    for row in rows_movies:
-        print(row)
-
-
-if __name__ == "__main__":
-    main()
