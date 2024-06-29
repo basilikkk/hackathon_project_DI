@@ -31,10 +31,29 @@ class Application:
         cursor.execute(query,(id,))
         connection.commit()
 
+    
+    def update_application_by_job_title_and_company(self, new_data: dict):
+        query = "UPDATE contacts SET contact_date = %s, action = %s, job_title = %s, job_link = %s, contact_name = %s WHERE job_title = %s AND company = %s;"
+        cursor.execute(query, (
+            new_data.get("contact_date"),
+            new_data.get("action"),
+            new_data.get("job_title"),
+            new_data.get("job_link"),
+            new_data.get("contact_name"),
+            new_data.get("old_job_title"),
+            new_data.get("old_company")
+        ))
+        connection.commit()
+
+    
     def select_all(self) -> list[tuple]:
         query = "select * from contacts;"
         cursor.execute(query)
-        rows = (
-            cursor.fetchall()
-        )  # if the query returns something (like select) - fetch all of the rows returned
+        rows = (cursor.fetchall())
+        return rows
+    
+    def sort_by_date(self) -> list:
+        query = "SELECT * FROM contacts ORDER BY contact_date;"
+        cursor.execute(query)
+        rows = cursor.fetchall()
         return rows
