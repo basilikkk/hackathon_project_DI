@@ -72,7 +72,7 @@ def add_new_application():
     contact_name_entry.grid(row=5, column=1)
 
     error_label=Label(root_add_func,font='Georgia 13',text='',bg='white',fg='red')
-    error_label.grid(row=5,column=2)
+    error_label.grid(row=2,column=2)
 
     def validate_date(date_text):
         try:
@@ -300,21 +300,34 @@ def show_application():
         new_contact_name_entry.insert(0, table[6])
         new_contact_name_entry.grid(row=6, column=1)
 
+        error_label = Label(root_change_func, font="Georgia 13", text="", fg="red", bg="white")
+        error_label.grid(row=3, column=2)
+
+        def validate_date(date_text):
+            try:
+                datetime.strptime(date_text, '%Y-%m-%d')
+                return True
+            except ValueError:
+                return False
+
         def submit_update():
-            new_data = {
-                "contact_date": new_contact_date_entry.get(),
-                "action": new_action_entry.get(),
-                "job_title": new_job_title_entry.get(),
-                "job_link": new_job_link_entry.get(),
-                "contact_name": new_contact_name_entry.get(),
-                "old_job_title": old_job_title_entry.get(),
-                "old_company": old_company_entry.get()
-            }
-            item = Application("", "", "", "", "", "")
-            item.update_application_by_job_title_and_company(new_data)
-            root_change_func.destroy()
-            root_show_all_func.destroy()
-            show_application()
+            if validate_date(new_contact_date_entry.get()):
+                new_data = {
+                    "contact_date": new_contact_date_entry.get(),
+                    "action": new_action_entry.get(),
+                    "job_title": new_job_title_entry.get(),
+                    "job_link": new_job_link_entry.get(),
+                    "contact_name": new_contact_name_entry.get(),
+                    "old_job_title": old_job_title_entry.get(),
+                    "old_company": old_company_entry.get()
+                }
+                item = Application("", "", "", "", "", "")
+                item.update_application_by_job_title_and_company(new_data)
+                root_change_func.destroy()
+                root_show_all_func.destroy()
+                show_application()
+            else:
+                error_label.config(text=f"Invalid date format. \nUse YYYY-MM-DD.")
         
         update_button = ttk.Button(root_change_func, text="Update", command=submit_update)
         update_button.grid(row=7, column=1)
