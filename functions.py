@@ -11,6 +11,8 @@ connection = psycopg2.connect(
     dbname=DBNAME, user=USER, password=PASSWORD, host=HOST
 )
 
+#Comment for check git
+
 # Creating a cursor object to interact with the database
 cursor = connection.cursor()
 
