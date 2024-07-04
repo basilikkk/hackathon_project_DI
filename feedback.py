@@ -6,6 +6,8 @@
 # The only thing I could mention is that it was not easy to test your DB since you skip table creating in the code. 
 # I know you tested it localy with created table, but I needed to see this table and its columns :) What I mean is that:
 
+# Also for DB credantials it is better to use .env file to hide it :) 
+
 def create_tables():
     commands = (
         """"""
