@@ -19,7 +19,7 @@ def create_tables():
         )
         """""",
     )
-    
+
     conn = create_connection()
     cursor = conn.cursor()
     try:

@@ -1,10 +1,10 @@
 import psycopg2
 
 # Constants for database connection
-DBNAME = "mqrqzrkh"
-USER = "mqrqzrkh"
-PASSWORD = "vtlXY-CZwJ_s6Jr_AXdGYFIiZ6-nN2qj"
-HOST = "hattie.db.elephantsql.com"
+DBNAME = "-"
+USER = "-"
+PASSWORD = "-"
+HOST = "-"
 
 # Establishing the connection
 connection = psycopg2.connect(
